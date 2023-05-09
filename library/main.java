@@ -1,3 +1,4 @@
+// siap sejahtera kami
 import java.util.Scanner;
 
 class Main {
