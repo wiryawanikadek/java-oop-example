@@ -1,4 +1,4 @@
-//saya mengisi komen di github ini
+//saya mengisi komen di github 
 
 import java.util.Scanner;
 import java.util.InputMismatchException;
