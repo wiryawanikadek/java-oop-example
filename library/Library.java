@@ -82,4 +82,3 @@ class Library {
   }
 }
 
-// dalam tes komen
