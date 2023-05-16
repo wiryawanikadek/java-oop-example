@@ -16,22 +16,24 @@ class Library {
     }
   }
 
+  // agar mengetahui id book sudah di pakai
   public Boolean isBookIdExist(String id) {
     Boolean isExist = false;
     for (Book book : this.books) {
       if (book.id.equals(id)) {
-        System.out.println("Book id is already used");
+        System.out.println("Book id sudah di pakai!");
         isExist = true;
       }
     }
     return isExist;
   }
 
-  public Boolean isMemberIdExist(String id) {
+// agar mengetahui id member sudah di pakai
+  public Boolean isMemberIdExist(String id) {  
     Boolean isExist = false;
     for (Member member : this.members) {
       if (member.id.equals(id)) {
-        System.out.println("Member id is already used");
+        System.out.println("Member id sudah di pakai!");
         isExist = true;
       }
     }

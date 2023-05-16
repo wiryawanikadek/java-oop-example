@@ -17,23 +17,28 @@ class Main {
       showMenu();
       int selectedMenu = chooseMenu();
 
-      if (selectedMenu == 1) {
-        showBooks();
-      } else if (selectedMenu == 2) {
-        addBook();
-      } else if (selectedMenu == 3) {
-        showMembers();
-      } else if (selectedMenu == 4) {
-        addMember();
-      } else if (selectedMenu == 5) {
-        borrowBook();
-      } else if (selectedMenu == 6) {
-        returnBook();
-      } else {
-        System.out.println("wrong input");
+      try {
+        if (selectedMenu == 1) {
+          showBooks();
+        } else if (selectedMenu == 2) {
+          addBook();
+        } else if (selectedMenu == 3) {
+          showMembers();
+        } else if (selectedMenu == 4) {
+          addMember();
+        } else if (selectedMenu == 5) {
+          borrowBook();
+        } else if (selectedMenu == 6) {
+          returnBook();
+        } else {
+        //Try Catch 
+          System.out.println("Salah input");
+        }
+      } catch (Exception e) {
+        System.out.println("An error occurred: " + e.getMessage());
       }
 
-      System.out.print("continue ? ");
+      System.out.print("Lanjutkan ? ");
       isContinue = scan.next();
     }
   }
@@ -101,47 +106,52 @@ class Main {
     return pilihan;
 }
 
+//melihat id book
   public static void showBooks() {
     for (Book book : library.books) {
       System.out.println(book.id + " " + book.title);
     }
   }
 
+//menambah id Book
   public static void addBook() {
     Book book = new Book();
-
+   
     System.out.print("id : ");
     book.id = scan.next();
 
     System.out.print("title : ");
     book.title = scan.next();
-
+   
     library.addBook(book);
   }
 
+//melihat siapa saja membernya
   public static void showMembers() {
     for (Member member : library.members) {
       System.out.println(member.id + " " + member.name);
     }
   }
 
+  //menambahkan membernya
   public static void addMember() {
     Member member = new Member();
-
+   
     System.out.print("id : ");
     member.id = scan.next();
 
     System.out.print("name : ");
     member.name = scan.next();
-
+   
     library.addMember(member);
   }
 
+//meminjam book
   public static void borrowBook() {
     try {
       System.out.print("id member : ");
       String memberId = scan.next();
-  
+      
       System.out.print("id book : ");
       String bookId = scan.next();
   
@@ -151,6 +161,7 @@ class Main {
     }
   }
 
+//mengembalikan book
   public static void returnBook() {
     try {
       System.out.print("id member : ");
