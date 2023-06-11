@@ -1,7 +1,7 @@
-//saya mengisi komen di github ini
+// comen saya di github
 
-import java.util.Scanner;
 import java.util.InputMismatchException;
+import java.util.Scanner;
 
 class Main {
 
@@ -17,28 +17,25 @@ class Main {
       showMenu();
       int selectedMenu = chooseMenu();
 
-      try {
-        if (selectedMenu == 1) {
-          showBooks();
-        } else if (selectedMenu == 2) {
-          addBook();
-        } else if (selectedMenu == 3) {
-          showMembers();
-        } else if (selectedMenu == 4) {
-          addMember();
-        } else if (selectedMenu == 5) {
-          borrowBook();
-        } else if (selectedMenu == 6) {
-          returnBook();
-        } else {
-        //Try Catch 
-          System.out.println("Salah input");
-        }
-      } catch (Exception e) {
-        System.out.println("An error occurred: " + e.getMessage());
+      if (selectedMenu == 0) {
+        break;
+      } else if (selectedMenu == 1) {
+        showBooks();
+      } else if (selectedMenu == 2) {
+        addBook();
+      } else if (selectedMenu == 3) {
+        showMembers();
+      } else if (selectedMenu == 4) {
+        addMember();
+      } else if (selectedMenu == 5) {
+        borrowBook();
+      } else if (selectedMenu == 6) {
+        returnBook();
+      } else {
+        System.out.println("wrong input");
       }
 
-      System.out.print("Lanjutkan ? ");
+      System.out.print("continue(y) ? ");
       isContinue = scan.next();
     }
   }
@@ -51,41 +48,52 @@ class Main {
     System.out.println("4. add member");
     System.out.println("5. borrow book");
     System.out.println("6. return book");
+    System.out.println("0. Exit");
     System.out.println("================================");
   }
 
   public static void initLibraryData() {
     Book book1 = new Book();
-    book1.id = "1";
-    book1.title = "pemrograman java";
+    book1.Id("1");
+    book1.Title("pemrograman java");
 
     Book book2 = new Book();
-    book2.id = "2";
-    book2.title = "pemrograman oop";
+    book2.Id("2");
+    book2.Title("pemrograman oop");
 
     Book book3 = new Book();
-    book3.id = "3";
-    book3.title = "pemrograman android";
+    book3.Id("3");
+    book3.Title("pemrograman android");
+
+    Book book4 = new Book();
+    book4.Id("4");
+    book4.Title("jaringan komputer");
 
     Member member1 = new Member();
-    member1.id = "1";
-    member1.name = "aka";
+    member1.setId("1");
+    member1.setName("aka");
 
     Member member2 = new Member();
-    member2.id = "2";
-    member2.name = "budi";
+    member2.setId("2");
+    member2.setName("budi");
 
     Member member3 = new Member();
-    member3.id = "3";
-    member3.name = "tono";
+    member3.setId("3");
+    member3.setName("tono");
+
+    Member member4 = new Member();
+    member4.setId("4");
+    member4.setName("kevin");
 
     library.books.add(book1);
     library.books.add(book2);
     library.books.add(book3);
+    library.books.add(book4);
 
     library.members.add(member1);
     library.members.add(member2);
     library.members.add(member3);
+    library.members.add(member4);
   }
 
   public static int chooseMenu() {
@@ -98,51 +106,50 @@ class Main {
             pilihan = scan.nextInt();
             validInput = true;
         } catch (InputMismatchException e) {
-            System.out.println("Invalid input. Please enter a number.");
-            scan.next(); // clear scanner buffer
+            System.out.println("Inputan salah, masukkan nomor yang ada yang benar pada menu.");
+            scan.next();
         }
     }
-    
     return pilihan;
 }
 
 //melihat id book
   public static void showBooks() {
     for (Book book : library.books) {
-      System.out.println(book.id + " " + book.title);
+      System.out.println(book.Id() + " " + book.Title());
     }
   }
 
 //menambah id Book
   public static void addBook() {
     Book book = new Book();
-   
+
     System.out.print("id : ");
-    book.id = scan.next();
+    book.Id(scan.next());
 
     System.out.print("title : ");
-    book.title = scan.next();
-   
+    book.Title(scan.next());
+
     library.addBook(book);
   }
 
 //melihat siapa saja membernya
   public static void showMembers() {
     for (Member member : library.members) {
-      System.out.println(member.id + " " + member.name);
+      System.out.println(member.getId() + " " + member.getName());
     }
   }
 
   //menambahkan membernya
   public static void addMember() {
     Member member = new Member();
-   
+
     System.out.print("id : ");
-    member.id = scan.next();
+    member.setId(scan.next());
 
     System.out.print("name : ");
-    member.name = scan.next();
-   
+    member.setName(scan.next());
+
     library.addMember(member);
   }
 
@@ -151,13 +158,14 @@ class Main {
     try {
       System.out.print("id member : ");
       String memberId = scan.next();
-      
+  
       System.out.print("id book : ");
       String bookId = scan.next();
   
-      library.giveBook(memberId, bookId);
-    } catch (IndexOutOfBoundsException e) {
-      System.out.println("Terjadi error pada inputan");
+      library.giveBook(bookId, memberId);
+      System.out.println("Buku berhasil di pinjam");
+    } catch (Exception e) {
+      System.out.println("Buku tidak ada pada library atau member tidak terdaftar");
     }
   }
 
